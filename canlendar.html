@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <title>Canlendar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2019/01/01/14/55/calendar-3906791_1280.jpg">
+    <script src="http://classes.engineering.wustl.edu/cse330/content/calendar.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="util.js"></script>
+    <script src="login.js"></script> <!-- load the Login Ajax file -->
+    <script src="registration.js"></script> <!-- load the Registration Ajax file -->
+    
+</head>
+
+<body>
+    
+    <div>
+        <h2 id="status">Visitor Mode. Please login to see events.</h2>
+    </div>
+
+    <script src="logout.js"></script> <!-- load the logout Ajax file -->
+
+
+    <div class="Form">
+
+        <!--Login--> 
+        <div id="loginForm">
+            User Name
+            <input type="text" name='username' id="username" required><br>
+            Password
+            <input type="text" name="password" id="password" required><br>
+            <button id="login">Login</button>
+        </div>
+ 
+        <!--Registration-->
+        <form id="regForm">
+            <label for="username">New User Name</label>
+            <input type="text" name='username' id='username_reg' required><br>
+            
+            <label for="password">Password</label>
+            <input type="text" name="password" id="password_reg" required><br>
+
+            <label for="password2">Repeat Password</label>
+            <input type="text" name="password2" id="password2" required><br>
+
+            <button id="reg">Register</button>
+        </form>
+        
+    </div>
+    <!-- <botton id="reg">Register</botton> -->
+
+    
+
+
+   
+
+
+
+    <h1>📅 Calendar</h1>
+    <form id='form' hidden>
+        Year<input type="number" name="year" id="year"><br>
+        Month<input type="number" name="month" id="month">
+    </form>
+   <!-- <tr>h</tr> -->
+    <button id='load' hidden>Load</button>
+
+    <div id='table_div'>
+
+        <button class="switch_month" id="last_month">⬅️</button>
+        <h2 id='table_title'>.</h2>
+        <button class="switch_month" id="next_month">➡️</button>
+        <table id='table'>
+            <tr class="header">
+              <td>Sun</td>
+              <td>Mon</td>
+              <td>Tue</td>
+              <td>Wed</td>
+              <td>Thu</td>
+              <td>Fri</td>
+              <td>Sat</td>
+            </tr>
+            <!-- <tr>h</tr>
+            <tr>h</tr>
+            <tr>h</tr>
+            <tr>h</tr>
+            <tr>h</tr> -->
+        </table>
+    </div>
+
+    <select id="select_tag">
+        <option>All Events</option>
+        <option>demo2</option>
+        <option>demo3</option>
+    </select>
+
+    <button id="load_event">load event</button>
+
+    <br>
+    <br>
+
+
+    <!--Adding New Event-->
+    <div id="Adder">
+        <p style="font-size: medium;">Add An Event:</p>
+        <label for="title">Title</label>
+        <input type="text" id="title" required>
+
+        <label for="time">DayTime</label>
+        <input type="datetime-local" id="time" required>
+
+        <label for="tag">Tag</label>
+        <input type="text" name="tag" id="tag">
+
+        
+        <p>Share with: </p>
+        <input type="text" class="ppl">
+        <input type="text" class="ppl">
+        <input type="text" class="ppl">
+        <input type="text" class="ppl">
+        <input type="text" class="ppl">
+
+
+        <button id='add_event'>add event</button>
+
+    </div>
+    
+    <!--Event Editor-->
+    <div id="Editor">
+
+        <p>Select An Event to Edit: </p>
+        <label for="edit_title">Title</label>
+        <input type="text" id="edit_title">
+
+        <label for="edit_time">DayTime</label>
+        <input type="datetime-local" id="edit_time">
+
+        <label for="edit_tag">Tag</label>
+        <input type="text" name="edit_tag" id="edit_tag">
+        <button id='edit_event'>edit event</button>
+    
+    </div>
+
+    <br>
+
+    <!--Share Events With Users-->
+    <div id="Share_with">
+        <p>Select an Event to Share:</p>
+        <label for="share_user" id="shared_event">Share With</label>
+        <input type="text" id="share_user">
+        <button id="share_event">Share!</button>
+    </div>
+
+    <br>
+
+    <!--Delet Event-->
+    <button id='delete_event'>Delete Event</button>
+
+    <br>
+
+    
+    
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", initiate_calendar, false);
+        document.getElementById('load').addEventListener('click', display_month, false);
+        document.getElementById('next_month').addEventListener('click', next_month, false);
+        document.getElementById('last_month').addEventListener('click', last_month, false);
+        document.getElementById('load_event').addEventListener('click', get_event, false);
+        document.getElementById('login').addEventListener('click', loginAjax, false);
+        document.getElementById('reg').addEventListener('click', regAjax, false);
+        document.getElementById('add_event').addEventListener('click', add_event, false);
+        document.getElementById('edit_event').addEventListener('click', edit_event, false);
+        document.getElementById('delete_event').addEventListener('click', delete_event, false);
+        $('#select_tag').on('change', select_tag);
+        $('#share_event').on('click', share_event);
+        //document.getElementById('addppl').addEventListener('click', expand, false);
+    </script>
+
+</body>
+</html>
